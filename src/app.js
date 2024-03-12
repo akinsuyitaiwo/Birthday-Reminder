@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import bodyParser from "body-parser";
 import database from "./config/database.js"
+import router from "./routes/index.js";
 const app = express();
 
 const PORT = 3000 || process.env.PORT;
@@ -10,7 +11,7 @@ app.use(express.json())
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use("/", router);
 
 app.get("/", (req, res) => {
     res.status(200).send({

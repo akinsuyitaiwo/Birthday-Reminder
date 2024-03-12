@@ -1,4 +1,4 @@
-import Joi from "Joi";
+import Joi from "joi";
 
 const options = {
 	stripUnknown: true,
@@ -11,12 +11,12 @@ const options = {
 };
 
 const validateUser =  (User) => {
-    const schema =  Joi.obJoiect({
-        email: Joi.String().required(true).email(),
-        username: Joi.String().min(5).required(),
-        birthday: Joi.Number().required(true)
+    const schema =  Joi.object({
+        email: Joi.string().required().email(),
+        username: Joi.string().min(5).required(),
+        birthday: Joi.string().required()
     });
     return schema.validate(User,options)
 }
 
-export default validateUser
+export default validateUser;

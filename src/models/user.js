@@ -1,11 +1,12 @@
 import { Schema , model} from "mongoose";
 
-const userSchema = new schema ({
+const userSchema = new Schema ({
     username: {
         type: String,
     },
     email: {
-        type: String
+        type: String,
+        unique: true,
     },
     birthday: {
         type: Date
