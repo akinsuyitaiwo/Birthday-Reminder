@@ -1,29 +1,41 @@
-import express from "express"
-import cors from "cors"
-import bodyParser from "body-parser";
-import database from "./config/database.js"
-import router from "./routes/index.js";
+const express = require("express")
+const cors = require ("cors")
+const bodyParser =require("body-parser");
+const database =require("./config/database.js")
+const router =require("./routes/user.js");
+const path =require("path")
+const cron = require("node-cron")
+
+
 const app = express();
 
 const PORT = 3000 || process.env.PORT;
 
+
+
 app.use(express.json())
 app.use(cors())
+
+app.set("views", path.join(__dirname, "./views"));
+app.set("view engine", "ejs");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use("/", router);
 
 app.get("/", (req, res) => {
-    res.status(200).send({
-        message: "Welcome to the birthday scheduler app"
-    })
+    res.render("home");
 })
 app.get("/", (req, res) => {
-    res.status(404).send({
-        message: "Page not found"
-    })
+    res.render("404")
 })
 app.listen(PORT, async() => {
     await database.connect()
     console.log(`Server is running on port ${PORT}`)
 });
+
+cron.schedule('0 7 * * *', () => {
+    console.log('Checking birthdays...');
+    getBirthdays();
+    });

@@ -1,7 +1,7 @@
-import models from "../models/index.js"
-import validateUser from "../validations/user.js"
-import sendMail from "../utils/mail.js"
-import cron from "node-cron"
+const models = require("../models/index.js")
+const validateUser = require("../validations/user.js")
+const sendMail = require("../utils/mail.js")
+const cron = require("node-cron")
 
 
 const createUser = async  (req, res) => {
@@ -12,24 +12,14 @@ const createUser = async  (req, res) => {
         if(error){
             return res.status(400).send(error.message);
         }
-        const userExist = await models.User.findOne({email});
-    if (userExist) {
-      return (
-        res.status(409).
-        send({
-          message:
-            "This user already exist. Please sign up with a new email",
-        })
-      );
-    }
         const user = await models.User.create({
             username,
             email,
             birthday
         });
-        return res.status(200).send({
-            message: 'Birthday recorded successfully',
-            user: user
+        return res.status(200).render(("response"),
+        {
+            user
         })
     } catch (error) {
         console.error("error creating user", error.message)
@@ -62,9 +52,6 @@ const getBirthdays = async() =>{
         console.error("error getting birthdays", error.message);
     };
 }
-cron.schedule('0 7 * * *', () => {
-    console.log('Checking birthdays...');
-    getBirthdays();
-    });
 
-export {createUser, getBirthdays}
+
+module.exports = {createUser, getBirthdays}

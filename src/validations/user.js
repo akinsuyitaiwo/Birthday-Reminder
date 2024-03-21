@@ -1,4 +1,4 @@
-import Joi from "joi";
+const Joi = require("joi");
 
 const options = {
 	stripUnknown: true,
@@ -19,4 +19,4 @@ const validateUser =  (User) => {
     return schema.validate(User,options)
 }
 
-export default validateUser;
+module.exports = validateUser;

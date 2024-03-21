@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday App</title>
+  <style>
+    body {
+      background-color: linen;
+      justify-content: center;
+    }
+    ul {
+      display: inline-block;
+    }
+    h1 {
+      color: maroon;
+      margin-left: 40px;
+    }
+    input {
+  width: 100%;
+  }
+    </style>
+</head>
+<body>
+  <header>
+    <h1>Enter Your Information</h1>
+  </header>
+  <form action="/create" method="post">
+    <label for="birthday">Date of Birth:</label>
+    <input type="date" id="birthday" name="birthday" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

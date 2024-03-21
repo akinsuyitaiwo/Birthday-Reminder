@@ -1,9 +1,18 @@
-import { Router } from "express";
-import {createUser, getBirthdays} from "../controller/user.js"
+const express = require("express");
+const {createUser, getBirthdays} = require("../controller/user.js") 
 
-const router = Router();
+const router = express.Router();
 
-router.post('/', createUser)
+
+router.get("/register", (req, res) => {
+	res.render("register");
+});
+
+router.get("/create", (req, res) => {
+	res.render("create")
+})
+
+router.post('/create', createUser)
 router.get( '/birthdays', getBirthdays);
 
-export default router;
+module.exports = router;
