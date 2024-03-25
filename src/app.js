@@ -4,7 +4,7 @@ const bodyParser =require("body-parser");
 const database =require("./config/database.js")
 const router =require("./routes/user.js");
 const path =require("path")
-const cron = require("node-cron")
+
 
 
 const app = express();
@@ -35,7 +35,3 @@ app.listen(PORT, async() => {
     console.log(`Server is running on port ${PORT}`)
 });
 
-cron.schedule('0 7 * * *', () => {
-    console.log('Checking birthdays...');
-    getBirthdays();
-    });
